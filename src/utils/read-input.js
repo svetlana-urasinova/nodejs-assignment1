@@ -1,4 +1,4 @@
-export const logInput = req => {
+export const readInput = (req, callback) => {
   const body = [];
 
   req.on('data', chunk => {
@@ -8,7 +8,7 @@ export const logInput = req => {
   req.on('end', () => {
     const message = parseMessage(body);
 
-    console.log(message);
+    callback(message);
   });
 };
 

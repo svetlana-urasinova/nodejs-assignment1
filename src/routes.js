@@ -1,5 +1,5 @@
 import { pages } from './pages.js';
-import { logInput } from './utils/log-input.js';
+import { readInput } from './utils/read-input.js';
 import { wrapHtml } from './utils/wrap-html.js';
 import { routes, methods, codes } from './constants.js';
 
@@ -16,7 +16,10 @@ export const requestHandler = (req, res) => {
       res.write(wrapHtml(pages.users));
       break;
     case url === routes.createUser && method === methods.post:
-      logInput(req);
+      readInput(req, message => {
+        console.log(`New user:`, message);
+      });
+
       res.statusCode = codes.redirect;
       res.setHeader('Location', '/');
       break;
